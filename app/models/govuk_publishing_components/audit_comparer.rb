@@ -75,6 +75,7 @@ module GovukPublishingComponents
             warning_count: warnings.length,
             gem_style_references: result[:gem_style_references],
             jquery_references: result[:jquery_references],
+            unused_css: result[:unused_css]
           }
         else
           data << {

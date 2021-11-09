@@ -8,6 +8,8 @@ module GovukPublishingComponents
       components_found = []
       @gem_style_references = []
       @jquery_references = []
+      @unused_css = []
+      @css_classes = []
 
       if application_found
         templates = Dir["#{path}/app/views/**/*.erb"]
@@ -67,6 +69,7 @@ module GovukPublishingComponents
         components_found: components_found,
         gem_style_references: @gem_style_references.flatten.uniq.sort,
         jquery_references: @jquery_references.flatten.uniq.sort,
+        unused_css: @css_classes.flatten.uniq.sort,
       }
     end
 
@@ -83,6 +86,11 @@ module GovukPublishingComponents
           jquery_references = find_code_references(file, src, /\$\(/)
           @jquery_references << jquery_references if jquery_references
         else
+          if type == "stylesheets" or type == "print_stylesheets"
+            @css_classes << find_classes_in_css(src)
+          else
+            @classes_in_code << find_classes_in_code(src)
+          end
           gem_style_references = find_code_references(file, src, /gem-c-[-_a-zA-Z]+/)
           @gem_style_references << gem_style_references if gem_style_references
         end
@@ -111,6 +119,17 @@ module GovukPublishingComponents
       clean_file_path = /(?<=#{Regexp.escape(@path.to_s)}\/)[\/a-zA-Z_-]+.[a-zA-Z.]+/
 
       return file[clean_file_path] if regex.match?(src)
+    end
+
+    def find_classes_in_css(src)
+      src.scan(/([.]{1}[0-9a-zA-Z_-]+)/)
+    end
+
+    def find_classes_in_code(src)
+    end
+
+    def find_unused_css
+      ['test']
     end
 
     def clean_file_name(name)

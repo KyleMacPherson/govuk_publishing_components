@@ -98,6 +98,22 @@
             <% end %>
           </ul>
         <% end %>
+
+        <% if application[:unused_css].any? %>
+          <%= render "govuk_publishing_components/components/heading", {
+            text: "Unused CSS",
+            font_size: "m",
+            margin_bottom: 4,
+            heading_level: 3,
+          } %>
+          <p class="govuk-body"></p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <% application[:unused_css].each do |style| %>
+              <li><%= style %></li>
+            <% end %>
+          </ul>
+        <% end %>
       <% else %>
         <p class="govuk-body">This application was not found. This could be because you do not have this repository checked out locally.</p>
       <% end %>
