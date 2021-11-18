@@ -2,28 +2,34 @@
 
 <%= render 'govuk_publishing_components/components/title', title: "Components audit", margin_top: 0; %>
 
-<% applications = capture do %>
-  <%= render "applications" %>
-<% end %>
-
-<% components = capture do %>
-  <%= render "components" %>
-<% end %>
-
 <% if @in_application or @other_applications %>
+  <% tabs = [] %>
+  <% applications = capture do %>
+    <%= render "applications" %>
+  <% end %>
+  <%
+    label = "Applications"
+    label = "This application" if @in_application
+    tabs << {
+      id: "applications",
+      label: label,
+      content: applications,
+    }
+  %>
+
+  <% components = capture do %>
+    <%= render "components" %>
+  <% end %>
+  <%
+    tabs << {
+      id: "components-gem",
+      label: "Components",
+      content: components,
+    }
+  %>
+
   <%= render "govuk_publishing_components/components/tabs", {
-    tabs: [
-      {
-        id: "applications",
-        label: "Applications",
-        content: applications,
-      },
-      {
-        id: "components-gem",
-        label: "Components",
-        content: components,
-      }
-    ]
+    tabs: tabs
   } %>
 <% else %>
   <%= render "components" %>

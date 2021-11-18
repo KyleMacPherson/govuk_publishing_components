@@ -9,7 +9,9 @@ module GovukPublishingComponents
       @gem_style_references = []
       @jquery_references = []
       @unused_css = []
+
       @css_classes = []
+      @classes_in_code = []
 
       if application_found
         templates = Dir["#{path}/app/views/**/*.erb"]
@@ -69,7 +71,8 @@ module GovukPublishingComponents
         components_found: components_found,
         gem_style_references: @gem_style_references.flatten.uniq.sort,
         jquery_references: @jquery_references.flatten.uniq.sort,
-        unused_css: @css_classes.flatten.uniq.sort,
+        # unused_css: @css_classes.flatten.uniq.sort,
+        unused_css: @classes_in_code.flatten.uniq.sort,
       }
     end
 
@@ -86,7 +89,7 @@ module GovukPublishingComponents
           jquery_references = find_code_references(file, src, /\$\(/)
           @jquery_references << jquery_references if jquery_references
         else
-          if type == "stylesheets" or type == "print_stylesheets"
+          if %w[stylesheets print_stylesheets].include?(type)
             @css_classes << find_classes_in_css(src)
           else
             @classes_in_code << find_classes_in_code(src)
@@ -122,10 +125,30 @@ module GovukPublishingComponents
     end
 
     def find_classes_in_css(src)
-      src.scan(/([.]{1}[0-9a-zA-Z_-]+)/)
+      matches = src.scan(/([.#]+[0-9a-zA-Z_\- ,.#]+\{)/).flatten.uniq
+      all_classes = []
+      matches.each do |match|
+        css_classes = match.gsub(' {', '').split(/ /)
+        css_classes.each do |css_class|
+          all_classes << css_class if css_class.start_with?(".", "#")
+        end
+      end
+
+      all_classes
     end
 
     def find_classes_in_code(src)
+      matches = src.scan(/class[:=]{1}[ ]*["']{1}[a-zA-Z0-9\-\_!#{} ]+/).flatten.uniq
+      all_classes = []
+      matches.each do |match|
+        # css_classes = match.gsub(/["']/, "").gsub("class=", "").gsub("class:", "").split(/ /)
+        css_classes = match.gsub(/["']/, "").split(/ /)
+        css_classes.each do |css_class|
+          all_classes << css_class
+        end
+      end
+
+      all_classes
     end
 
     def find_unused_css

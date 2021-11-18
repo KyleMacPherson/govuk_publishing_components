@@ -1,6 +1,6 @@
 <%
   title = "Applications"
-  title = "This application" unless ENV["MAIN_COMPONENT_GUIDE"]
+  title = @applications[0][:name] if @in_application
 %>
 <%= render "govuk_publishing_components/components/heading", {
   text: title,
@@ -99,20 +99,22 @@
           </ul>
         <% end %>
 
-        <% if application[:unused_css].any? %>
-          <%= render "govuk_publishing_components/components/heading", {
-            text: "Unused CSS",
-            font_size: "m",
-            margin_bottom: 4,
-            heading_level: 3,
-          } %>
-          <p class="govuk-body"></p>
+        <% if @in_application %>
+          <% if application[:unused_css].any? %>
+            <%= render "govuk_publishing_components/components/heading", {
+              text: "Unused CSS",
+              font_size: "m",
+              margin_bottom: 4,
+              heading_level: 3,
+            } %>
+            <p class="govuk-body"></p>
 
-          <ul class="govuk-list govuk-list--bullet">
-            <% application[:unused_css].each do |style| %>
-              <li><%= style %></li>
-            <% end %>
-          </ul>
+            <ul class="govuk-list govuk-list--bullet">
+              <% application[:unused_css].each do |style| %>
+                <li><%= style %></li>
+              <% end %>
+            </ul>
+          <% end %>
         <% end %>
       <% else %>
         <p class="govuk-body">This application was not found. This could be because you do not have this repository checked out locally.</p>
