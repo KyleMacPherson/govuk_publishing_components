@@ -123,7 +123,7 @@ describe('Magna charta', function () {
       graph = element.find('.mc-chart')
       graphContainer = element.find('.mc-chart-container')
       table = element.find('table')
-      toggle = element.find('.mc-toggle-button')
+      toggle = element.find('.govuk-button.govuk-button--secondary')
     })
 
     afterEach(function () {
@@ -316,7 +316,7 @@ describe('Magna charta', function () {
     })
 
     it('graph is shown when toggle is called', function () {
-      element.find('.mc-toggle-button')[0].click()
+      element.find('.govuk-button--secondary')[0].click()
       expect(table).toHaveClass('mc-hidden')
       expect(graphContainer).not.toHaveClass('mc-hidden')
     })
