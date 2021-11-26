@@ -1,5 +1,6 @@
 <%= render 'govuk_publishing_components/components/title', title: GovukPublishingComponents::Config.component_guide_title, margin_top: 0 %>
 
+<%= @gem_path %><br/>
 <% unless ENV["MAIN_COMPONENT_GUIDE"] %>
   <p class="govuk-body">
     <% if @index_audit_summary[:application_found] %>
