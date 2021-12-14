@@ -50,7 +50,6 @@ describe "Component guide index" do
 @import 'govuk_publishing_components/components/back-link';
 @import 'govuk_publishing_components/components/breadcrumbs';
 @import 'govuk_publishing_components/components/button';
-@import 'govuk_publishing_components/components/contextual-sidebar';
 @import 'govuk_publishing_components/components/cookie-banner';
 @import 'govuk_publishing_components/components/error-message';
 @import 'govuk_publishing_components/components/error-summary';
