@@ -10,6 +10,7 @@
 ## Unreleased
 
 * Change JavaScript modules from start to init ([PR #2605](https://github.com/alphagov/govuk_publishing_components/pull/2605))
+* Bump `govuk-frontend` from 3.14.0 to 4.0.0 ([PR #2355](https://github.com/alphagov/govuk_publishing_components/pull/2533))
 
 ## 28.5.0
 
