@@ -5,8 +5,18 @@
 // = require jquery/dist/jquery
 // = require ./modules.js
 
-$(document).ready(function () {
-  'use strict'
+var useJquery = useJquery || true
 
-  window.GOVUK.modules.start()
-})
+if (useJquery) {
+  console.log('using jQuery')
+  $(document).ready(function () {
+    'use strict'
+
+    window.GOVUK.modules.start()
+  })
+} else {
+  console.log('not using jQuery')
+  document.addEventListener("DOMContentLoaded", function() {
+    window.GOVUK.modules.start()
+  })
+}
