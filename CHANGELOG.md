@@ -10,6 +10,7 @@
 ## Unreleased
 
 * Change JavaScript modules from start to init ([PR #2605](https://github.com/alphagov/govuk_publishing_components/pull/2605))
+* Update Accordion design ([PR #2581](https://github.com/alphagov/govuk_publishing_components/pull/2581))
 
 ## 28.5.0
 
