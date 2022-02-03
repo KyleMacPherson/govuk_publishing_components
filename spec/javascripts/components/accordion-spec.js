@@ -8,7 +8,7 @@ describe('An accordion component', function () {
   var container = document.createElement('div')
   var localeData = {}
   var html =
-      '<div class="gem-c-accordion govuk-!-margin-bottom-6" id="default-id" data-module="gem-accordion" data-anchor-navigation="true" data-show-text="Show" data-hide-text="Hide" data-show-all-text="Show all sections" data-hide-all-text="Hide all sections" data-this-section-visually-hidden=" this section">' +
+      '<div class="gem-c-accordion govuk-!-margin-bottom-6" id="default-id" data-module="gem-c-accordion" data-anchor-navigation="true" data-show-text="Show" data-hide-text="Hide" data-show-all-text="Show all sections" data-hide-all-text="Hide all sections" data-this-section-visually-hidden=" this section">' +
         '<section class="gem-c-accordion__section">' +
           '<div class="gem-c-accordion__section-header">' +
             '<h2 class="gem-c-accordion__section-heading">' +
